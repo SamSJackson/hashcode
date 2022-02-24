@@ -37,7 +37,10 @@ def run_file(people : list, projects : list, coefficients : list) -> float:
     values = values.sort(lambda x : x[0])
 
     projects = [each[1] for each in values]
+
+    days = 0
     
+
     # Loop
     # Run until a project finishes
     # Check if can assign, assign if worth

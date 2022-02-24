@@ -2,6 +2,7 @@ class Person:
 	def __init__(self, name : str):
 		self._name = name
 		self._skills = dict()
+		self._available = True
 
 	def __str__(self):
 		return self._name
@@ -13,6 +14,13 @@ class Person:
 	@property
 	def skills(self):
 		return self._skills
+
+	@property
+	def available(self):
+		return self._available
+
+	def toggleUnavailable(self):
+		self._available = not(self._available)
 
 	def hasSkill(self, skill, level):
 		cur_level = self._skills.get(skill, 0)
