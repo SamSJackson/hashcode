@@ -21,6 +21,10 @@ class Project:
 		return self._name
 
 	@property
+	def finished(self):
+		return self._remaining==0
+
+	@property
 	def averageLevel(self):
 		total =0
 		for _, level in self._requirements.items():
@@ -61,13 +65,13 @@ class Project:
 
 	def nextDay(self):
 		self._remaining -= 1
-		if self._remaining ==0:
+		if self._remaining == 0:
 			for each in self._assigned.values():
-				each.toggleAvailible
+				each.toggleUnavailable()
 			return True
 		return False
 
-	def canRun(self) -> bool:
+	def meetsRequirements(self) -> bool:
 		for skill, level in self._requirements.items():
             if not skill in self._assigned:
                 return False
@@ -84,3 +88,6 @@ class Project:
                 if not mentor_available:
                     return False
         return True
+
+    def canRun(self):
+    	return [each.available for each in self._assigned.values].all()

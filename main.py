@@ -39,7 +39,10 @@ def run_file(people : list, projects : list, coefficients : list) -> float:
     projects = [each[1] for each in values]
 
     days = 0
-    
+    i = 0
+    while ([not p.finished for p in projects].any()):
+        if (projects[i].canRun()):
+             
 
     # Loop
     # Run until a project finishes
