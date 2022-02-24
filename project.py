@@ -20,6 +20,13 @@ class Project:
 		return self._name
 
 	@property
+	def averageLevel(self):
+		total =0
+		for _, level in self._requirements.items():
+			total += level
+		return total/len(self._requirements)
+
+	@property
 	def score(self):
 		return self._score
 	
@@ -50,6 +57,24 @@ class Project:
 
 		self._assigned[role] = person
 		return True
+
+	def canRun(self) -> bool:
+		for skill, level in self._requirements.items():
+            if not skill in self._assigned:
+                return False
+
+            person = self._assigned[skill]
+            has_skill = person.hasSkill(skill, level)
+            if has_skill == "no":
+                return False
+            elif has_skill == "yes":
+                pass
+            else:
+                # they need a mentor
+                mentor_available = [person.hasSkill(skill, level) == "yes" for person in self._assigned].any()
+                if not mentor_available:
+                    return False
+        return True
 
 	def run(self, startTime):
 		"""returns score"""
