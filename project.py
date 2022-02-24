@@ -19,6 +19,13 @@ class Project:
 	def __str__(self):
 		return self._name
 
+	@property
+	def score(self):
+		return self._score
+	
+	@property
+	def duration(self):
+		return self._duration
 
 	@property
 	def importance(self):
