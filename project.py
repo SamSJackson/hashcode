@@ -1,14 +1,13 @@
 from math import floor
-
-from numpy import true_divide
+from typing import Dict
 from person import Person
 
 class Project:
 
 	def __init__(self, info : str):
 		info = info.split()
-		self._requirements = dict()
-		self._assigned = dict()
+		self._requirements: Dict[str, int] = dict()
+		self._assigned: Dict[str, Person] = dict()
 		self._name = info[0]
 		self._duration = int(info[1])
 		self._score = int(info[2])
@@ -37,7 +36,8 @@ class Project:
 	def run(self, startTime):
 		"""returns score"""
 		for role in self._requirements:
-			pass
+			self._assigned[role].upgradeSkill(role)
+			
 		finish = self._duration + startTime
 		delta = self._expiryDate - finish
 		if delta >= 1:
