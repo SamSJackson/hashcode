@@ -80,7 +80,7 @@ class Project:
         for skill, level in self._requirements.items():
             if not skill in self._assigned:
                 return False
-                
+
         person = self._assigned[skill]
         has_skill = person.hasSkill(skill, level)
         if has_skill == "no":
@@ -93,9 +93,6 @@ class Project:
             if not mentor_available:
                 return False
 
-
-return True
-
-
-def canRun(self):
-    return [each.available for each in self._assigned.values].all()
+        return True
+    def canRun(self):
+        return all([each.available for each in self._assigned.values()])

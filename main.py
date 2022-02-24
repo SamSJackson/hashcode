@@ -1,3 +1,5 @@
+from typing import List
+
 from person import Person
 from project import Project
 from formula import formula_func
@@ -24,6 +26,7 @@ def read(path):
             project.addRole(f.readline())
         projects.append(project)
 
+    f.close()
     return people, projects
 
 
@@ -36,39 +39,45 @@ def run_file(people: list, projects: list) -> float:
     coefficients = [1] * 5
     values = [(formula_func(coefficients, project), project)
               for project in projects]
+    values.sort(key=lambda x: x[0])
 
-    values = values.sort(lambda x: x[0])
-
-    projects: List[project] = [each[1] for each in values]
+    projects: List[Project] = [each[1] for each in values]
     for p in projects:
+        peeps = people.copy()
         for skill, level in p._requirements.items():
-            for person in people:
+            for person in peeps:
                 if person.hasSkill(skill, level):
                     p.assign(person, skill)
+                    peeps.remove(person)
                     break
 
-    stillToRun = projects
+    stillToRun = projects.copy()
     running = []
     finished = []
     days = 0
     i = 0
-    while ([not p.finished for p in projects].any()):
+    while not all([p.finished for p in projects]):
         for each in stillToRun:
             if each.canRun():
                 each.start()
-                stillToRun.remove(stillToRun.indexOf(each))
+                stillToRun.remove(each)
                 running.append(each)
 
         for each in running:
-            if each.nextDay():
-                running.remove(running.indexOf(each))
+            done = each.nextDay()
+            if done:
+                print(each._name)
+            if done:
+                running.remove(each)
                 finished.append(each)
+    print(len(finished))
     return finished
 
 
 if __name__ == '__main__':
-    finished = run_file(read("a_an_example.in.txt"))
-    output(finished, "newfile.txt")
+    people, projects = read("c_collaboration.in.txt")
+    finished = run_file(people, projects)
+    outputFile(finished, "c.txt")
 
     # Loop
     # Run until a project finishes
