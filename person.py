@@ -16,4 +16,6 @@ class Person:
 		self._skills[skillName] = level
 
 	def upgradeSkill(self, skillname : str):
-		self._skills[skillname] = self._skills.get(skillname, 0) + 1 
+		self._skills[skillname] = self._skills.get(skillname, 0) + 1
+
+

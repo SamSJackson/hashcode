@@ -44,4 +44,3 @@ class Project:
 			return self._score
 		else:
 			return floor(0, self._score + delta)
-
