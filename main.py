@@ -27,3 +27,14 @@ def read(path):
 people, projects = read("a_an_example.in.txt")
 
 
+def run_file(people : list, projects : list):
+    # Get value for each project
+    # Run first project
+
+    # Loop
+    # Run until a project finishes
+    # Check if can assign, assign if worth
+    # Remove people assigned
+
+
+

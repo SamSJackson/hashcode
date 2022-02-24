@@ -1,0 +1,31 @@
+value projects as points per day 
+
+importance:
+
+
+top fraction = score, minStartDate
+bottom fraction = averageLevel, num_roles, duration
+constant coefficient for each variable 
+formula = ((h*score + i*minStartDate) / (u*duration + p*averageLevel + t*num_roles)))
+
+
+how to assign roles:
+give a value to project with formula
+
+
+when runnable:
+	
+
+good things:
+	short duration
+	low level requirements
+
+
+bad things:
+	lots of people
+	long duration
+	high level requirements
+
+
+
+
