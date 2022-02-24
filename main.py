@@ -1,5 +1,6 @@
 from person import Person
 from project import Project
+from formula import formula_func
 
 def read(path):
     f =  open(path)
@@ -27,10 +28,16 @@ def read(path):
 people, projects = read("a_an_example.in.txt")
 
 
-def run_file(people : list, projects : list):
+def run_file(people : list, projects : list, coefficients : list) -> float:
     # Get value for each project
     # Run first project
+    values = [(formula_func(coefficients, project), project) 
+                    for project in projects]
+    
+    values = values.sort(lambda x : x[0])
 
+    projects = [each[1] for each in values]
+    
     # Loop
     # Run until a project finishes
     # Check if can assign, assign if worth
