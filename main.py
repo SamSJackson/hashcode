@@ -1,6 +1,7 @@
 from person import Person
 from project import Project
 from formula import formula_func
+from output import outputFile
 
 def read(path):
     f =  open(path)
@@ -28,9 +29,10 @@ def read(path):
 people, projects = read("a_an_example.in.txt")
 
 
-def run_file(people : list, projects : list, coefficients : list) -> float:
+def run_file(people : list, projects : list) -> float:
     # Get value for each project
     # Run first project
+    coefficients = [1]*5 
     values = [(formula_func(coefficients, project), project) 
                     for project in projects]
     
@@ -63,6 +65,9 @@ def run_file(people : list, projects : list, coefficients : list) -> float:
     return finished
 
 
+if __name__ == '__main__':
+    finished = run_file(read("a_an_example.in.txt"))
+    output(finished, "newfile.txt")
 
     # Loop
     # Run until a project finishes

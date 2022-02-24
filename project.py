@@ -78,7 +78,7 @@ class Project:
 
 	def meetsRequirements(self) -> bool:
 		for skill, level in self._requirements.items():
-            if not skill in self._assigned:
+			if not skill in self._assigned:
                 return False
 
             person = self._assigned[skill]
