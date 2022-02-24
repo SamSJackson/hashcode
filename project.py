@@ -15,6 +15,7 @@ class Project:
 		self._score = int(info[2])
 		self._expiryDate = int(info[3])
 		self._num_roles = int(info[4])
+		self._remaining  = self._duration
 
 	def __str__(self):
 		return self._name
@@ -58,6 +59,14 @@ class Project:
 		self._assigned[role] = person
 		return True
 
+	def nextDay(self):
+		self._remaining -= 1
+		if self._remaining ==0:
+			for each in self._assigned.values():
+				each.toggleAvailible
+			return True
+		return False
+
 	def canRun(self) -> bool:
 		for skill, level in self._requirements.items():
             if not skill in self._assigned:
@@ -75,15 +84,3 @@ class Project:
                 if not mentor_available:
                     return False
         return True
-
-	def run(self, startTime):
-		"""returns score"""
-		for role in self._requirements:
-			self._assigned[role].upgradeSkill(role)
-			
-		finish = self._duration + startTime
-		delta = self._expiryDate - finish
-		if delta >= 1:
-			return self._score
-		else:
-			return floor(0, self._score + delta)
