@@ -63,6 +63,11 @@ class Project:
 		self._assigned[role] = person
 		return True
 
+	def start(self):
+		self._remaining -= 1
+		for each in self._assigned.values():
+			each.toggleUnavailable()
+
 	def nextDay(self):
 		self._remaining -= 1
 		if self._remaining == 0:
