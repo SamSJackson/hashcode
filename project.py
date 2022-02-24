@@ -1,10 +1,13 @@
+from math import floor
+
+from numpy import true_divide
 from person import Person
 
 class Project:
 
 	def __init__(self, info : str):
 		info = info.split()
-		self._roles = dict()
+		self._requirements = dict()
 		self._assigned = dict()
 		self._name = info[0]
 		self._duration = int(info[1])
@@ -22,9 +25,23 @@ class Project:
 	def addRole(self, role : str):
 		roleName, level = role.split()
 		level = int(level)
-		self._roles[roleName] = level
+		self._requirements[roleName] = level
 
-	def assign(self, person : Person):
-		self._assigned[person.name] = person
+	def assign(self, person : Person, role: str) -> bool:
+		if not role in self._requirements:
+			return False
 
+		self._assigned[role] = person
+		return True
+
+	def run(self, startTime):
+		"""returns score"""
+		for role in self._requirements:
+			pass
+		finish = self._duration + startTime
+		delta = self._expiryDate - finish
+		if delta >= 1:
+			return self._score
+		else:
+			return floor(0, self._score + delta)
 
