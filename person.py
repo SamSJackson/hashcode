@@ -8,7 +8,20 @@ class Person:
 
 	@property
 	def name(self):
-		return self._name	
+		return self._name
+
+	@property
+	def skills(self):
+		return self._skills
+
+	def hasSkill(self, skill, level):
+		cur_level = self._skills.get(skill, 0)
+		if cur_level < level-1:
+			return "no"
+		elif cur_level == level-1:
+			return "mentor"
+		else:
+			return "yes"
 
 	def addSkills(self, skill : str):
 		skillName, level = skill.split()
