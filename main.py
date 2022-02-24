@@ -36,13 +36,33 @@ def run_file(people : list, projects : list, coefficients : list) -> float:
     
     values = values.sort(lambda x : x[0])
 
-    projects = [each[1] for each in values]
+    projects: List[project] = [each[1] for each in values]
+    for p in projects:
+        for skill, level in p._requirements.items():
+            for person in people:
+                if person.hasSkill(skill, level):
+                    p.assign(person, skill)
+                    break
 
+    stillToRun = projects
+    running =[]
+    finished = []
     days = 0
     i = 0
     while ([not p.finished for p in projects].any()):
-        if (projects[i].canRun()):
-             
+        for each in stillToRun:
+            if each.canRun():
+                each.start()
+                stillToRun.remove(stillToRun.indexOf(each))
+                running.append(each)
+        
+        for each in running:
+            if each.nextDay():
+                running.remove(running.indexOf(each))
+                finished.append(each)
+    return finished
+
+
 
     # Loop
     # Run until a project finishes
